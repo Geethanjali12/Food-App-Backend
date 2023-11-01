@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/AuthRoutes');
 const hotelRoutes = require('./routes/HotelRoutes');
+const foodRoutes = require('./routes/FoodRoutes');
+const cartRoutes = require('./routes/CartRoutes');
+const OrderRoutes = require('./routes/OrderRoutes');
 dotenv.config();
 
 const app = express();
@@ -17,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-app.use('/', authRoutes, hotelRoutes);
+app.use('/', authRoutes, hotelRoutes, foodRoutes, cartRoutes, OrderRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -28,7 +28,13 @@ const hotelController = {
 
     postNewHotel: async (req, res) => {
         const { hotel_name, hotel_address } = req.body;
-
+        if (!hotel_name || !hotel_address) {
+            return res.status(400).json({
+                status_code: 400,
+                status: false,
+                message: 'Both Hotel Name and Hotel Address is required.'
+            });
+        }
         try {
             const hotelList = new Hotel({ hotel_name, hotel_address });
             await hotelList.save();

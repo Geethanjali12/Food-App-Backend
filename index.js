@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors({ origin: '*' }));
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:${process.env.DB_PORT}/${process.env.DB_NAME}?authMechanism=DEFAULT&authSource=admin`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

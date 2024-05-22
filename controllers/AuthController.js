@@ -83,6 +83,7 @@ const authController = {
               status: true,
               message: 'User registered successfully' });
           } catch (error) {
+            console.log('register error', error);
             res.status(500).json({ 
               status_code: 500,
               status: false,

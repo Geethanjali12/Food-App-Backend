@@ -3,7 +3,7 @@ const Cart = require('../models/CartModel');
 const cartController = {
     addToCart: async (req, res) => {
         const { userId, foodItemId, quantity } = req.body;
-        
+        console.log('cart1', userId, foodItemId, quantity);
         try {
             if (!userId || !foodItemId || !quantity || quantity <= 0) {
                 return res.status(400).json({ 
@@ -13,8 +13,11 @@ const cartController = {
                 });
             }
             let cart = await Cart.findOne({ userId });
+            console.log('cart2', cart);
             if (!cart) {
+              console.log('into if !cart');
               cart = new Cart({ userId, items: [] });
+              console.log('into if !cart', cart);
               return res.status(404).json({ 
                 status_code: 404,
                 status: false, 
@@ -24,6 +27,7 @@ const cartController = {
             }
       
             const existingItemIndex = cart.items.findIndex(item => item.foodItemId === foodItemId);
+            console.log('existingItemIndex', existingItemIndex);
       
             if (existingItemIndex !== -1) {
               cart.items[existingItemIndex].quantity += quantity;
@@ -39,6 +43,7 @@ const cartController = {
                 message: 'Item added to the cart successfully' 
             });
           } catch (error) {
+            console.log('error', error);
             res.status(500).json({ 
                 status: false, 
                 status_code: 500,
@@ -49,7 +54,7 @@ const cartController = {
 
     listCartItems: async (req, res) => {
         const { userId } = req.params;
-        
+        console.log('userId', userId);
         try {
             const cart = await Cart.findOne({ userId });
             if (!cart) {

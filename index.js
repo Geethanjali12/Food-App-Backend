@@ -15,14 +15,14 @@ app.use(express.json());
 
 app.use(cors({ origin: '*' }));
 
-mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:${process.env.DB_PORT}/${process.env.DB_NAME}?authMechanism=DEFAULT&authSource=admin`, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 app.use('/', authRoutes, hotelRoutes, foodRoutes, cartRoutes, OrderRoutes);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.DB_PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

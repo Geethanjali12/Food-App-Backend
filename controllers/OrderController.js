@@ -14,6 +14,7 @@ const orderController = {
             }
 
             const order = new Order({ userId, items, totalPrice });
+            console.log('order', order);
             await order.save();
 
             res.status(200).json({ 

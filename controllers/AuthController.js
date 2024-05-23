@@ -55,6 +55,7 @@ const authController = {
               }
             });
           } catch (error) {
+            console.log('login error', error);
             res.status(500).json({ 
               status_code: 500,
               status: false,
